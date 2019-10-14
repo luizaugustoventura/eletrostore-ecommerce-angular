@@ -1,0 +1,106 @@
+<header>
+    <nav class="navbar navbar-light bg-info">
+        <a class="navbar-brand text-white" style="cursor: pointer;" routerLink="/login">
+          <h3>
+            EletroStore
+          </h3>
+        </a>
+        <form class="form-inline">
+            <button class="btn btn-outline-light" routerLink="/login">Voltar</button>
+        </form>
+    </nav>
+</header>
+
+<body>
+  <div class="vertically-aligned">
+    <form [formGroup]="formRegister" (ngSubmit)="registerUser(formRegister.value)"
+      class="form-group text-center">
+        <h2 class="text-info">Cadastro EletroStore</h2>
+        <div class="row justify-content-center">
+          <div class="col-10 col-lg-8 border border-info rounded">
+            <br>
+
+            <!--NOME-->
+            <div class="form-group row">
+              <label for="inputNome" class="col-2 col-form-label">Nome</label>
+              <div class="col-10 col-lg-8">
+                <input type="text" formControlName="name" id="inputNome" class="form-control"
+                  required autofocus name="nome"  />
+              </div>
+            </div>
+
+            <!--EMAIL-->
+            <div class="form-group row">
+              <label for="inputEmail" class="col-2 col-form-label">Email</label>
+              <div class="col-10 col-lg-8">
+                <input type="email" formControlName="email" id="inputEmail" class="form-control"
+                  required autofocus name="email"  />
+              </div>
+            </div>
+
+            <!--SENHA-->
+            <div class="form-group row">
+              <label for="inputPassword" class="col-2 col-form-label">Senha</label>
+              <div class="col-10 col-lg-8">
+                <input type="password" formControlName="password" id="inputPassword" class="form-control"
+                  required name="senha"  />
+              </div>
+            </div>
+
+            <!--ENDEREÇO-->
+            <div class="form-group row">
+              <label for="inputEmail" class="col-2 col-form-label">Endereço</label>
+              <div class="col-10 col-lg-8">
+                <input type="text" formControlName="address" id="inputEndereco" class="form-control"
+                  required autofocus name="usuario" >
+              </div>
+            </div>
+
+            <!--BAIRRO - CIDADE-->
+            <div class="form-group row">
+              <div class="col-2 col-md-2 col-form-label">
+                <label for="inputBairro" class="">Bairro</label>
+              </div>
+              <div class="col-10 col-md-4">
+                <input type="text" formControlName="neighborhood" id="inputBairro" class="form-control"
+                  required autofocus name="usuario" >
+              </div>
+
+              <div class="col-2 col-md-2 col-form-label">
+                <label for="inputCidade" class="">Cidade</label>
+              </div>
+              <div class="col-10 col-md-4">
+                <input type="text" formControlName="city" id="inputCidade" class="form-control"
+                  required autofocus name="usuario" >
+              </div>
+            </div>
+
+            <!--ESTADO - CEP-->
+            <div class="form-group row"  style="margin-top: -5px;">
+              <div class="col-2 col-md-2 col-form-label">
+                <label for="inputEstado" class="">Estado</label>
+              </div>
+              <div class="col-10 col-md-4">
+                <input type="text" formControlName="state" id="inputEstado" class="form-control"
+                  required autofocus name="estado" >
+              </div>
+
+              <div class="col-2 col-md-2 col-form-label">
+                <label for="inputCep" class="">CEP</label>
+              </div>
+              <div class="col-10 col-md-4">
+                <input type="text" formControlName="zipCode" id="inputCep" class="form-control"
+                  required autofocus name="cep" >
+              </div>
+            </div>
+
+            <br>
+            <button type="submit" [disabled]="!formRegister.valid" class="btn btn-info">Cadastrar</button>
+            <br><br>
+          </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+  </div>
+</body>

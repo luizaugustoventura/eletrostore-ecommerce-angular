@@ -1,0 +1,15 @@
+<ngb-toast
+  *ngIf="show"
+  header="Aviso"
+  [delay]="3000"
+  [autohide]="autohide"
+  (mouseenter)="autohide = false"
+  (mouseleave)="autohide = true"
+  (hide)="show = false; autohide = true"
+  [class.bg-danger]="!success"
+  [class.bg-info]="success"
+>
+  <div>
+    {{msg}}
+  </div>
+</ngb-toast>

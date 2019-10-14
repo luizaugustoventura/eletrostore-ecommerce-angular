@@ -1,0 +1,186 @@
+<header>
+  <nav class="navbar navbar-light bg-info">
+      <a class="navbar-brand text-white mouse-pointer" (click)="recarregar()">
+        <h3>
+          EletroStore
+        </h3>
+      </a>
+      <form class="form-inline">
+          <span class="navbar-text text-white">
+            <h5>
+              {{login.name}}
+            </h5>
+          </span>
+          &nbsp;
+          &nbsp;
+          <a *ngIf="!login.admin" class="text-white mouse-pointer" title="Seu carrinho"
+            (click)="modalCarrinho()">
+              <i class="material-icons">shopping_cart</i>
+          </a>
+          &nbsp;
+          &nbsp;
+          <div class="row">
+            <div class="col">
+              <div ngbDropdown placement="down-right" class="d-inline-block">
+                <b><a class="text-white mouse-pointer" id="dropdownBasic1" ngbDropdownToggle></a></b>
+
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="border border-info rounded">
+                  <h5 *ngIf="login.admin" ngbDropdownItem class="text-info"> admin: {{login.name}}</h5>
+                  <h5 *ngIf="!login.admin" ngbDropDownItem class="text-info"> Usuário: {{login.name}}</h5>
+
+                  <button ngbDropdownItem (click)="modalMinhaConta(login._id)">Minha conta</button>
+                  <button ngbDropdownItem (click)="logout()">Logout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </nav>
+</header>
+
+
+<body class="container">
+  <br><br>
+
+  <!--Área do cliente-->
+  <div *ngIf="!login.admin">
+    <form class="form-row">
+      <div class="form-group col-9">
+        <input type="text" name="busca" [(ngModel)]="busca" class="form-control">
+      </div>
+      <div class="form-group col-3">
+        <button (click)="buscar()" class="btn btn-outline-info">Buscar</button>
+    </div>
+    </form>
+
+    <br><br>
+
+    <div>
+      <div class="row">
+        <span *ngFor="let produto of produtos" class="col text-center">
+          <a routerLink="/detail/{{produto._id}}" class="text-secondary">
+            <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
+              <span>{{produto.name}}</span><br>
+              <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
+          </a>
+          <br><br>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!--Área do administrador-->
+  <div *ngIf="login.admin">
+    <ngb-tabset type="pills" justify="center" class="bg-info">
+
+      <!-- SESSÃO DE PRODUTOS -->
+      <ngb-tab title="Produtos">
+        <ng-template ngbTabContent>
+          <br>
+
+          <form class="form-row">
+              <div class="form-group col-9">
+                <input type="text" name="busca" [(ngModel)]="busca" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <button (click)="search('p', busca)" class="btn btn-outline-info">Buscar</button>
+              </div>
+          </form>
+
+          <br>
+
+          <div>
+            <button class="btn btn-info floating-button align-middle" (click)="modalProduto()">
+              <span><i class="material-icons align-middle">add</i></span>
+              Novo Produto
+            </button>
+          </div>
+
+          <div>
+            <div class="row">
+              <span *ngFor="let produto of produtos" class="col text-center">
+                <a routerLink="/detail/{{produto._id}}" class="text-secondary">
+                  <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
+                    <span>{{produto.name}}</span><br>
+                    <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
+                </a>
+                <br><br>
+              </span>
+            </div>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+      <!--SESSÃO DE CLIENTES-->
+      <ngb-tab title="Clientes">
+        <ng-template ngbTabContent>
+          <br>
+
+          <!--Formulário de busca-->
+          <form class="form-row">
+              <div class="form-group col-9">
+                <input type="text" name="busca" [(ngModel)]="busca" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <button (click)="search('c', busca)" class="btn btn-outline-info">Buscar</button>
+              </div>
+          </form>
+
+          <br>
+
+          <div>
+            <div *ngFor="let cliente of clientes" class="card">
+              <div class="card-header">
+                <span>{{cliente.name}}</span>
+
+                <span class="float-right">
+                  <a class="text-info mouse-pointer" (click)="modalPessoa(cliente)"
+                  title="Editar cliente">
+                    <i class="material-icons">edit</i>
+                  </a>
+
+                  <a class="text-danger mouse-pointer" (click)="modalExcluir('cliente',cliente._id)"
+                  title="Excluir cliente">
+                      <i class="material-icons">close</i>
+                  </a>
+                </span>
+
+              </div>
+              <div class="card-body">
+                <p><b>Email: </b>{{cliente.email}}</p>
+                <p><b>Endereço: </b>{{cliente.address}}, {{cliente.number}}</p>
+                <p><b>Cidade: </b>{{cliente.city}}</p>
+                <p><b>Bairro: </b>{{cliente.neighborhood}}</p>
+                <p><b>Estado: </b>{{cliente.state}}</p>
+                <p><b>CEP: </b>{{cliente.zipCode}}</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <!--SESSÃO DE VENDAS-->
+      <ngb-tab title="Vendas">
+        <ng-template ngbTabContent>
+          <br>
+
+          <!--Formulário de busca-->
+          <form class="form-row">
+              <div class="form-group col-9">
+                <input type="text" name="busca" [(ngModel)]="busca" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <button (click)="buscar()" class="btn btn-outline-info">Buscar</button>
+              </div>
+          </form>
+
+          <br>
+
+          <p>Because default values have been customized.</p>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+
+</body>
