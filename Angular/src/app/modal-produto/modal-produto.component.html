@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 *ngIf="!produto._id" class="modal-title">Editando Produto</h4>
+    <h4 *ngIf="produto._id" class="modal-title">Alterando Produto</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+  <form #formProduto=ngForm novalidate>
+    <label>Nome</label>
+    <input type="text" [(ngModel)]="produto.name" name="name"
+      class="form-control" required>
+
+    <label>Imagem</label>
+    <input type="text" [(ngModel)]="produto.imageUrl" name="image"
+      class="form-control" required>
+
+    <label>Descrição</label>
+    <input type="textarea" [(ngModel)]="produto.description" name="description"
+      class="form-control" required>
+
+    <label>Preço</label>
+    <input type="number" [(ngModel)]="produto.price" name="price"
+      class="form-control" required>
+
+    <label>Estoque</label>
+    <input type="number" [(ngModel)]="produto.stock" name="stock"
+      class="form-control" required>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="produto._id" type="button" class="btn btn-info"
+    (click)="alterar(produto)" [disabled]="!formProduto.valid">Salvar</button>
+
+    <button *ngIf="!produto._id" type="button" class="btn btn-info"
+    (click)="criar(formProduto.value)" [disabled]="!formProduto.valid">Criar</button>
+</div>

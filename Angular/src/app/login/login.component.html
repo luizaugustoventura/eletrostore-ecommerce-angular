@@ -1,0 +1,44 @@
+<body>
+<div class="vertically-aligned">
+  <form [formGroup]="formLogin" (ngSubmit)="login(formLogin.value)" class="form-group text-center">
+      <h2 class="text-info">Entre no EletroStore</h2>
+      <div class="row justify-content-center">
+        <div class="col-6 border border-info rounded">
+          <br>
+          <label for="inputEmail" class="">Usuário</label>
+          <input type="email" id="inputEmail" class="form-control" required autofocus
+            name="usuario" formControlName="email">
+
+          <label for="inputPassword" class="">Senha</label>
+          <input type="password" id="inputPassword" class="form-control" required
+            name="senha" formControlName="password">
+
+          <br>
+          <button class="btn btn-info" type="submit" [disabled]="!formLogin.valid">Entrar</button>
+          <br><br>
+
+          <a routerLink='/register' class="text-info">Cadastrar</a>
+          <br><br>
+        </div>
+      </div>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+  </form>
+</div>
+</body>
+<!--<h3>Entre no EletroStore</h3>
+<form>
+  <label>Usuário: </label>
+  <input type="text" name="usuario" [(ngModel)]="usuario"/>
+  <br /><br />
+
+  <label>Senha: </label>
+  <input type="password" name="senha" [(ngModel)]="senha"/>
+
+  <button (click)="identificaUsuario()">Entrar</button>
+
+</form>
+-->
+<!--
+<app-home [usuario]="nomeUsuario"></app-home>
+-->

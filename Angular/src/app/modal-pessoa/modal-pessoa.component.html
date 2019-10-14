@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 *ngIf="!pessoa._id" class="modal-title">Cadastrando Usuário</h4>
+    <h4 *ngIf="pessoa._id" class="modal-title">Editando Usuário</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+  <form #formPessoa=ngForm novalidate>
+    <label>Nome</label>
+    <input type="text" [(ngModel)]="pessoa.name" name="name" class="form-control" required>
+
+    <label>Email</label>
+    <input type="text" [(ngModel)]="pessoa.email" name="email" class="form-control" required>
+
+    <label>Senha</label>
+    <input type="secret" [(ngModel)]="pessoa.password" name="password" class="form-control" required>
+
+    <label *ngIf="!pessoa.admin">Endereço</label>
+    <input type="text" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.address" name="address"
+      class="form-control" required>
+
+    <label *ngIf="!pessoa.admin">Número</label>
+    <input type="number" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.number" name="number"
+      class="form-control" required>
+
+    <label *ngIf="!pessoa.admin">Cidade</label>
+    <input type="text" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.city" name="city" class="form-control"
+      required>
+
+    <label *ngIf="!pessoa.admin">Estado</label>
+    <input type="text" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.state" name="state" class="form-control"
+      required>
+
+    <label *ngIf="!pessoa.admin" >CEP</label>
+    <input type="number" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.zipCode" name="zipCode"
+      class="form-control" required>
+
+    <label *ngIf="!pessoa.admin">Bairro</label>
+    <input type="text" *ngIf="!pessoa.admin" [(ngModel)]="pessoa.neighborhood"
+      name="neighborhood" class="form-control"
+      required>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+    <button *ngIf="pessoa._id" type="button" class="btn btn-info" (click)="alterar(pessoa)"
+      [disabled]="!formPessoa.valid">
+        Salvar
+    </button>
+
+    <button *ngIf="!pessoa._id" type="button" class="btn btn-info" (click)="criar(formPessoa.value)"
+      [disabled]="!formPessoa.valid">
+        Salvar
+    </button>
+</div>

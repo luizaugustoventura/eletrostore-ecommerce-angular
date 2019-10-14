@@ -1,0 +1,58 @@
+<header>
+    <nav class="navbar navbar-light bg-info">
+        <a class="navbar-brand text-white" style="cursor: pointer;" routerLink="/home">
+          <h3>
+            EletroStore
+          </h3>
+        </a>
+        <form class="form-inline">
+            <button class="btn btn-outline-light" routerLink="/home">Voltar</button>
+        </form>
+    </nav>
+</header>
+
+<body class="container">
+  <br><br><br>
+
+  <div *ngIf="produto" class="row justify-content-center">
+    <div class="col-auto">
+      <h4>{{produto.name}}</h4>
+      <img src="{{produto.imageUrl}}" width="400" height="250" class="rounded">
+    </div>
+
+    <!--Visualização do Cliente-->
+    <div *ngIf="produto && !admin" class="col-auto">
+      <br><br>
+      <span><b class="text-info">Preço: </b>R$ {{produto.price | number:".2"}}</span><br>
+      <span><b class="text-info">Descrição: </b>{{produto.description}}</span>
+      <br><br>
+      <div class="text-center">
+        <form>
+          <div class="row">
+            <label class="col-sm-8" for="quantity">Quantidade </label>
+            <input class="form-control col-sm-4" type="number" id="quantity" #inputQuantity min="1" value="1">
+          </div>
+          <button (click)="comprar(produto, inputQuantity.value)" class="btn btn-info">Comprar</button>
+        </form>
+      </div>
+    </div>
+
+    <!--Visualização do Administrador-->
+    <div *ngIf="produto && admin" class="col-auto">
+      <br><br>
+      <span><b class="text-info">Preço: </b>R$ {{produto.price | number:".2"}}</span><br>
+      <span><b class="text-info">Descrição: </b>{{produto.description}}</span><br>
+      <span><b class="text-info">Estoque: </b>{{produto.stock}}</span><br>
+      <span><b class="text-info">Vendas: </b>{{produto.sales}}</span>
+      <br><br>
+
+      <div class="text-center">
+        <button class="btn btn-info" (click)="modalProduto(produto)">Alterar</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="modalExcluir('produto', produto._id)">Remover</button>
+      </div>
+    </div>
+  </div>
+
+
+</body>
