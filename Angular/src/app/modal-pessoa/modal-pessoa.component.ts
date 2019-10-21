@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pessoa } from '../models/Pessoa';
 import { ClientesServiceService } from '../services/ClientesService/clientes-service.service';
+import { ToastService } from '../services/ToastController/toast.service';
 
 @Component({
   selector: 'app-modal-pessoa',
@@ -14,7 +15,8 @@ export class ModalPessoaComponent implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private clientesService: ClientesServiceService
+    private clientesService: ClientesServiceService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -44,7 +46,10 @@ export class ModalPessoaComponent implements OnInit {
 
   alterar(cliente: any) {
     this.clientesService.updateCliente(cliente)
-    .then(() => console.log('Cliente atualizado com sucesso'))
+    .then(() => {
+      console.log('Cliente atualizado com sucesso');
+      this.toastService.show('Cliente atualizado com sucesso', true);
+    })
     .catch((error) => console.log(error));
 
     this.activeModal.close('Close click');

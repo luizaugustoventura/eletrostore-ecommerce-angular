@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalProdutoComponent } from './modal-produto/modal-produto.component';
 import { ModalPessoaComponent } from './modal-pessoa/modal-pessoa.component';
 import { ModalExcluirComponent } from './modal-excluir/modal-excluir.component';
-import { ToastControllerComponent } from './toast-controller/toast-controller.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { ToastControllerComponent } from './toast-controller/toast-controller.co
     ModalProdutoComponent,
     ModalPessoaComponent,
     ModalExcluirComponent,
+    ToastComponent
     //ToastControllerComponent
   ],
   imports: [
@@ -35,8 +36,7 @@ import { ToastControllerComponent } from './toast-controller/toast-controller.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
-    NgbModule.forRoot()
+    NgbModule
   ],
   providers: [],
   entryComponents: [CarrinhoComponent, ModalProdutoComponent, ModalPessoaComponent, ModalExcluirComponent],
