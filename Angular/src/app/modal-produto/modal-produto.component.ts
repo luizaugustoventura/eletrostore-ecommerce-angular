@@ -3,7 +3,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Produto } from '../models/Produto';
 import { ProdutosServiceService } from '../services/ProdutosService/produtos-service.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ToastControllerComponent } from '../toast-controller/toast-controller.component';
 
 @Component({
   selector: 'app-modal-produto',

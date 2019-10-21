@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../services/LoginService/login.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LoggedPerson } from '../models/LoggedPerson';
+import { ToastService } from '../services/ToastController/toast.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
               public router: Router,
               private formBuilder: FormBuilder,
               private servicos: ServicosService,
+              private toastService: ToastService,
               private loginService: LoginService) { }
 
   ngOnInit() {
@@ -72,6 +74,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
     })
     .catch(error => {
+      this.toastService.show('Não foi possível efetuar login', false);
       console.log(error.message);
     });
 
