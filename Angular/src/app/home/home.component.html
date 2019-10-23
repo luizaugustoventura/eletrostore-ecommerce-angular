@@ -13,7 +13,7 @@
           </span>
           &nbsp;
           &nbsp;
-          <a *ngIf="!login.admin" class="text-white mouse-pointer" title="Seu carrinho"
+          <a *ngIf="!login.admin" class="text-white mouse-pointer" ngbTooltip="Seu carrinho"
             (click)="modalCarrinho()">
               <i class="material-icons">shopping_cart</i>
           </a>
@@ -136,12 +136,12 @@
 
                 <span class="float-right">
                   <a class="text-info mouse-pointer" (click)="modalPessoa(cliente)"
-                  title="Editar cliente">
+                  ngbTooltip="Editar cliente">
                     <i class="material-icons">edit</i>
                   </a>
 
                   <a class="text-danger mouse-pointer" (click)="modalExcluir('cliente',cliente._id)"
-                  title="Excluir cliente">
+                  ngbTooltip="Excluir cliente">
                       <i class="material-icons">close</i>
                   </a>
                 </span>
