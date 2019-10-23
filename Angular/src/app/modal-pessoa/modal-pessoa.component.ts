@@ -38,8 +38,14 @@ export class ModalPessoaComponent implements OnInit {
     };
 
     this.clientesService.setCliente(person)
-    .then(() => console.log('Cliente registrado com sucesso'))
-    .catch((error) => console.log(error));
+    .then(() => {
+      console.log('Cliente registrado com sucesso');
+      this.toastService.show('Cliente registrado com sucesso', true);
+    })
+    .catch((error) => {
+      console.log(error);
+      this.toastService.show('Erro ao registrar cliente', false);
+    });
 
     this.activeModal.close('Close click');
   }
@@ -50,7 +56,10 @@ export class ModalPessoaComponent implements OnInit {
       console.log('Cliente atualizado com sucesso');
       this.toastService.show('Cliente atualizado com sucesso', true);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      this.toastService.show('Erro ao atualizar cliente', false);
+    });
 
     this.activeModal.close('Close click');
   }

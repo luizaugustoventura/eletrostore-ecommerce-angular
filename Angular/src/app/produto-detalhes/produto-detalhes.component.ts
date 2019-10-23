@@ -9,6 +9,7 @@ import { VendasServiceService } from '../services/VendasService/vendas-service.s
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProdutoComponent } from '../modal-produto/modal-produto.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
+import { ToastService } from '../services/ToastController/toast.service';
 
 @Component({
   selector: 'app-produto-detalhes',
@@ -39,7 +40,8 @@ export class ProdutoDetalhesComponent implements OnInit {
     private servicos: ServicosService,
     private produtosService: ProdutosServiceService,
     private vendasService: VendasServiceService,
-    private modalService: NgbModal)
+    private modalService: NgbModal,
+    private toastService: ToastService)
     {
       if(!this.loginService.getLoggedPerson()){
         console.log("Por favor, efetue login antes!");
@@ -73,8 +75,13 @@ export class ProdutoDetalhesComponent implements OnInit {
   } */
 
   comprar(product: Produto, quantity: number) {
-    if(quantity >= 1)
+    if(quantity >= 1 && quantity <= product.stock) {
+      this.toastService.show('Produto adicionado ao carrinho', true);
       this.vendasService.adicionarAoCarrinho(product, Math.abs(Math.trunc(quantity)) );
+    }
+    else {
+      this.toastService.show('Quantidade indisponível', false);
+    }
   }
 
   modalProduto(produto: Produto = new Produto()) {

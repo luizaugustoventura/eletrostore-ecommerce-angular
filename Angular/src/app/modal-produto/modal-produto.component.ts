@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Produto } from '../models/Produto';
 import { ProdutosServiceService } from '../services/ProdutosService/produtos-service.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ToastService } from '../services/ToastController/toast.service';
 
 @Component({
   selector: 'app-modal-produto',
@@ -18,6 +19,7 @@ export class ModalProdutoComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private produtosService: ProdutosServiceService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder
   ) {
     //this.toastContoller = new ToastControllerComponent();
@@ -40,11 +42,11 @@ export class ModalProdutoComponent implements OnInit {
     this.produtosService.setProduto(product)
     .then(() => {
       console.log('Produto registrado com sucesso');
-      //this.toastContoller.showToast('Produto registrado com sucesso', true);
+      this.toastService.show('Produto registrado com sucesso', true);
     })
     .catch((error) => {
       console.log(error);
-      //this.toastContoller.showToast('Erro ao registrar Produto', false);
+      this.toastService.show('Erro ao registrar Produto', false);
     });
 
     this.activeModal.close('Close click');
@@ -54,11 +56,11 @@ export class ModalProdutoComponent implements OnInit {
     this.produtosService.updateProduto(produto)
     .then(() => {
       console.log('Produto atualizado com sucesso');
-      //this.toastContoller.showToast('Produto atualizado com sucesso', true);
+      this.toastService.show('Produto atualizado com sucesso', true);
     })
     .catch((error) => {
       console.log(error);
-      //this.toastContoller.showToast('Erro ao atualizar produto', false);
+      this.toastService.show('Erro ao atualizar produto', false);
     });
 
     this.activeModal.close('Close click');
