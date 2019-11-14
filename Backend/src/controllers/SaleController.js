@@ -53,7 +53,7 @@ module.exports = {
 
             Sale.create(sale)
             .then(sl => {
-                return res.satus.json({
+                return res.status(200).json({
                     success: true,
                     saleId: sl._id
                 });
@@ -62,7 +62,8 @@ module.exports = {
                 console.log(error);
                 return res.status(500).json({
                     success: false,
-                    message: 'Could not create sale'
+                    message: 'Could not create sale',
+                    error: error
                 });
             });
         }

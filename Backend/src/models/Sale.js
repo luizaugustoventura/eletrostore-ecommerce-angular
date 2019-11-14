@@ -3,15 +3,15 @@ const { model, Schema } = require('mongoose');
 const SaleSchema = new Schema({
     customerId: {
         type: Schema.Types.ObjectId,
-        ref: 'Customer',
+        ref: 'Person',
         required: true
     },
     products: [{
         productId: {
             type: Schema.Types.ObjectId,
-            ref: 'Product'
-        }
-    },{
+            ref: 'Product',
+            required: true
+        },
         quantity: {
             type: Number,
             required: true

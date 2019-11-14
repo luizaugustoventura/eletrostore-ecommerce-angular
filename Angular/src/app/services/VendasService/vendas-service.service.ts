@@ -4,14 +4,14 @@ import { Produto } from 'src/app/models/Produto';
 import { ProdutosServiceService } from '../ProdutosService/produtos-service.service';
 import { ProdutoCarrinho } from 'src/app/models/ProdutoCarrinho';
 import { Server } from '../../../config/server';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VendasServiceService {
 
-  //apiUrl = 'http://localhost:3333/product';
-  apiUrl = `${Server.server}/product`;
+  apiUrl = `${Server.server}/sales`;
   //meuCarrinho: Carrinho[] = [];
   /*produtosCarrinho: {
     product: Produto,
@@ -23,7 +23,8 @@ export class VendasServiceService {
 
 
   constructor(
-    private produtosService: ProdutosServiceService
+    private produtosService: ProdutosServiceService,
+    private httpClient: HttpClient
   ) { }
 
   /* adicionarAoCarrinho(productId: string, quantity: number) {
@@ -72,6 +73,10 @@ export class VendasServiceService {
       });
     }
   } */
+
+  setSale(sale: any): Promise<any> {
+    return this.httpClient.post(this.apiUrl, sale).toPromise();
+  }
 
   adicionarAoCarrinho(product: Produto, quantity: number) {
     const prod = this.produtosCarrinho.find(p => {return p.product._id == product._id});

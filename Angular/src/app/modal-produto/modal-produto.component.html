@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 *ngIf="!produto._id" class="modal-title">Editando Produto</h4>
+    <h4 *ngIf="!produto._id" class="modal-title">Registrando Produto</h4>
     <h4 *ngIf="produto._id" class="modal-title">Alterando Produto</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -13,7 +13,7 @@
       class="form-control" required>
 
     <label>Imagem</label>
-    <input type="text" [(ngModel)]="produto.imageUrl" name="image"
+    <input type="text" [(ngModel)]="produto.imageUrl" name="imageUrl"
       class="form-control" required>
 
     <label>Descrição</label>
@@ -36,5 +36,5 @@
     (click)="alterar(produto)" [disabled]="!formProduto.valid">Salvar</button>
 
     <button *ngIf="!produto._id" type="button" class="btn btn-info"
-    (click)="criar(formProduto.value)" [disabled]="!formProduto.valid">Criar</button>
+    (click)="criar(formProduto.value)" [disabled]="!formProduto.valid">Registrar</button>
 </div>

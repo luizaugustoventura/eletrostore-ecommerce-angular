@@ -49,7 +49,8 @@ module.exports = {
         .catch((error) => {
             return res.status(500).json({
                 success: false,
-                message: 'Could not store product'
+                message: 'Could not store product',
+                error: error
             });
         })
     },
