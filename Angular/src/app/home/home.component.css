@@ -49,3 +49,23 @@
 .mouse-pointer {
   cursor: pointer;
 }
+
+.negrito:hover {
+  font-weight: bold !important;
+  color: #138496 !important;
+}
+
+.negritored:hover {
+  font-weight: bold !important;
+  color: #a73838 !important;
+}
+
+.ativo {
+  font-weight: bold !important;
+  color: #17a3b8 !important;
+}
+
+.inativo {
+  font-weight: bold !important;
+  color: #a73838 !important;
+}

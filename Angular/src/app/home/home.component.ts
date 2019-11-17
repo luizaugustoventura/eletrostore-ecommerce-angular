@@ -65,7 +65,6 @@ export class HomeComponent implements OnInit {
       this.getProdutos();
       this.getClientes();
       this.getVendas();
-      console.log(this.vendas);
     }
   }
 
@@ -164,6 +163,7 @@ export class HomeComponent implements OnInit {
   recarregar() {
     this.produtos = this.bdProdutos;
     this.clientes = this.bdClientes;
+    this.vendas = this.bdVendas;
   }
 
   modalCarrinho() {

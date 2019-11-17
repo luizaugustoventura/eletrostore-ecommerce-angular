@@ -49,7 +49,7 @@
         <input type="text" name="busca" [(ngModel)]="busca" class="form-control">
       </div>
       <div class="form-group col-3">
-        <button (click)="buscar()" class="btn btn-outline-info">Buscar</button>
+        <button (click)="search('p', busca)" class="btn btn-outline-info">Buscar</button>
     </div>
     </form>
 
@@ -58,12 +58,14 @@
     <div>
       <div class="row">
         <span *ngFor="let produto of produtos" class="col text-center">
-          <a routerLink="/detail/{{produto._id}}" class="text-secondary">
-            <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
-              <span>{{produto.name}}</span><br>
-              <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
-          </a>
-          <br><br>
+          <span *ngIf="!produto.disabled">
+            <a routerLink="/detail/{{produto._id}}" class="text-secondary negrito">
+              <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
+                <span>{{produto.name}}</span><br>
+                <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
+            </a>
+            <br><br>
+          </span>
         </span>
       </div>
     </div>
@@ -99,7 +101,8 @@
           <div>
             <div class="row">
               <span *ngFor="let produto of produtos" class="col text-center">
-                <a routerLink="/detail/{{produto._id}}" class="text-secondary">
+                <a routerLink="/detail/{{produto._id}}" class="text-secondary"
+                [class.negrito]="!produto.disabled" [class.negritored]="produto.disabled">
                   <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
                     <span>{{produto.name}}</span><br>
                     <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
@@ -132,7 +135,9 @@
           <div>
             <div *ngFor="let cliente of clientes" class="card">
               <div class="card-header">
-                <span>{{cliente.name}}</span>
+                <span [class.ativo]="!cliente.disabled" [class.inativo]="cliente.disabled">
+                  {{cliente.name}}
+                </span>
 
                 <span class="float-right">
                   <a class="text-info mouse-pointer" (click)="modalPessoa(cliente)"
@@ -156,6 +161,9 @@
                 <p><b>CEP: </b>{{cliente.zipCode}}</p>
               </div>
             </div>
+
+            <br>
+
           </div>
         </ng-template>
       </ngb-tab>
@@ -198,6 +206,8 @@
                   </ng-template>
                 </ngb-panel>
               </ngb-accordion>
+
+              <br>
 
             </div>
           </div>
