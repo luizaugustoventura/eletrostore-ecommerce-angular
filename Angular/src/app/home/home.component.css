@@ -19,6 +19,24 @@
   background-color: #17a3b8;
 }
 
+
+/* ****************** Estilização dos ACCORDIONS ****************/
+
+::ng-deep ngb-accordion .btn-link{
+    margin-bottom: 0;
+    color: #656565;
+    font-size: 1.2rem;
+    font-weight: normal;
+    background-color: transparent;
+    text-decoration: none!important;
+}
+::ng-deep ngb-accordion .btn-link:hover{
+    color: #138496;
+    font-weight: bold;
+    text-decoration: none!important;
+}
+
+
 /********** Botão flutuante *************/
 .floating-button {
   right: 15px;

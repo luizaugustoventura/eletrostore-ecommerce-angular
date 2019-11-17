@@ -44,6 +44,44 @@ module.exports = {
             });
             
         }
+        else {
+            Sale.find({})
+            .then(sales => {
+                return res.status(200).json(sales);
+            })
+            .catch(error => {
+                return res.status(404).json({
+                    success: false,
+                    message: error
+                })
+            });
+        }
+    },
+
+    async getSales(req, res) {
+        const people = await Person.find({}).then(p => {return p});
+        const products = await Product.find({}).then(p => {return p});
+        const sales = await Sale.find({}).then(s => {return s});
+        
+        const vendas = await sales.map(s => {
+            return {
+                customer: people.find(p => { return p.id == s.customerId}),
+                products: s.products.map(prod => {
+                    return {
+                        product: products.find(p => {return p.id == prod.productId}),
+                        quantity: prod.quantity
+                    }
+                })
+            }
+        });
+
+        if(vendas)
+            return res.status(200).json(vendas);
+        else
+            return res.status(404).json({
+                success: false,
+                message: 'Could not list sales'
+            });
     },
 
     store(req, res) {

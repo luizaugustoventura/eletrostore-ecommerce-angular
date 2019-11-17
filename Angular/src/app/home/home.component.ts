@@ -13,6 +13,8 @@ import { ClientesServiceService } from '../services/ClientesService/clientes-ser
 import { Pessoa } from '../models/Pessoa';
 import { ModalPessoaComponent } from '../modal-pessoa/modal-pessoa.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
+import { Vendas } from '../models/Vendas';
+import { VendasServiceService } from '../services/VendasService/vendas-service.service';
 //import { login } from '../login/login.component';
 
 @Component({
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
 
   bdProdutos: Produto[];
   bdClientes: Pessoa[];
+  bdVendas: Vendas[];
+  vendas: Vendas[];
   produtos: Produto[];
   clientes: Pessoa[];
   busca: string;
@@ -40,6 +44,7 @@ export class HomeComponent implements OnInit {
     private servicos: ServicosService,
     private produtosService: ProdutosServiceService,
     private clientesService: ClientesServiceService,
+    private vendasService: VendasServiceService,
     private loginService: LoginService,
     private modalService: NgbModal,
     private router: Router
@@ -59,6 +64,8 @@ export class HomeComponent implements OnInit {
       this.login = this.loginService.getLoggedPerson();
       this.getProdutos();
       this.getClientes();
+      this.getVendas();
+      console.log(this.vendas);
     }
   }
 
@@ -87,7 +94,6 @@ export class HomeComponent implements OnInit {
 
            return { _id, name, imageUrl, description, price, stock, sales};
        });
-       console.log(this.produtos);
 
        this.produtos = this.bdProdutos;
     })
@@ -116,6 +122,22 @@ export class HomeComponent implements OnInit {
       });
 
       this.clientes = this.bdClientes;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  getVendas() {
+    this.vendasService.getSales()
+    .then(sales => {
+      this.bdVendas = sales.map(sls => {
+        const customer = sls.customer;
+        const products = sls.products;
+        return { customer, products };
+      });
+
+      this.vendas = this.bdVendas;
     })
     .catch(error => {
       console.log(error);

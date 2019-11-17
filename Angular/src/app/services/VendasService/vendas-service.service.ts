@@ -78,6 +78,10 @@ export class VendasServiceService {
     return this.httpClient.post(this.apiUrl, sale).toPromise();
   }
 
+  getSales(): Promise<any> {
+    return this.httpClient.get(`${this.apiUrl}/index`).toPromise();
+  }
+
   adicionarAoCarrinho(product: Produto, quantity: number) {
     const prod = this.produtosCarrinho.find(p => {return p.product._id == product._id});
     //let Prod: Produto = product;//Objeto tipo Produto

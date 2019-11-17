@@ -177,7 +177,31 @@
 
           <br>
 
-          <p>Because default values have been customized.</p>
+          <div>
+            <div *ngFor="let venda of vendas">
+
+              <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                <ngb-panel [title]="venda.customer.name" class="text-info">
+                  <ng-template ngbPanelContent>
+                    <span *ngFor="let produto of venda.products">
+                      <p><b>Produto: </b>{{produto.product.name}}</p>
+                      <p><img src="{{produto.product.imageUrl}}" class="rounded" width="100"></p>
+                      <p><b>Quantidade: </b>{{produto.quantity}}</p>
+                      <br>
+                    </span>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel [title]="2+2" [disabled]="true">
+                  <ng-template ngbPanelContent>
+
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+
+            </div>
+          </div>
+
         </ng-template>
       </ngb-tab>
     </ngb-tabset>

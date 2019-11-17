@@ -22,6 +22,7 @@ routes.delete('/people', PersonController.delete);
 
 //SALES
 routes.get('/sales', SaleController.index);
+routes.get('/sales/index', SaleController.getSales);
 routes.post('/sales', SaleController.store);
 
 
