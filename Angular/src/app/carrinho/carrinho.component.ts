@@ -6,6 +6,7 @@ import { ProdutoCarrinho } from '../models/ProdutoCarrinho';
 import { LoginService } from '../services/LoginService/login.service';
 import { Venda } from '../models/Venda';
 import { ProdutosServiceService } from '../services/ProdutosService/produtos-service.service';
+import { ToastService } from '../services/ToastController/toast.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -20,7 +21,7 @@ export class CarrinhoComponent implements OnInit {
     private vendasService: VendasServiceService,
     private loginService: LoginService,
     private produtosService: ProdutosServiceService,
-    private servicos: ServicosService,
+    private toastService: ToastService,
     public activeModal: NgbActiveModal
     ) {
     this.meuCarrinho = vendasService.getItensCarrinho();
@@ -47,17 +48,19 @@ export class CarrinhoComponent implements OnInit {
 
     console.log(cart);
     this.vendasService.setSale(cart)
-    .then(sale => {
+    .then(async sale => {
       console.log('Venda realizada');
       console.log(sale);
 
-      cart.products.forEach(async p => {
+      await cart.products.forEach(async p => {
         let prod = await this.produtosService.getProduto(p.productId).then(produtct => { return produtct.product });
         prod.sales += p.quantity;
         prod.stock -= p.quantity;
-        //console.log(prod);
         this.produtosService.updateProduto(prod);
       });
+
+      this.toastService.show('Pedido finalizado com sucesso', true);
+      this.activeModal.close('Close click');
     })
     .catch((error) => {
       console.log('Erro ao finalizar venda');

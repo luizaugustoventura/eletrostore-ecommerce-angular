@@ -24,6 +24,7 @@ routes.delete('/people', PersonController.delete);
 routes.get('/sales', SaleController.index);
 routes.get('/sales/index', SaleController.getSales);
 routes.post('/sales', SaleController.store);
+routes.delete('/sales', SaleController.clear);
 
 
 //LOGIN

@@ -141,6 +141,7 @@ export class HomeComponent implements OnInit {
       });
 
       this.vendas = this.bdVendas;
+      console.log(this.bdVendas);
     })
     .catch(error => {
       console.log(error);
@@ -167,6 +168,10 @@ export class HomeComponent implements OnInit {
         this.clientes = this.bdClientes.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
         break;
       case 'v':
+        console.log(search);
+        this.vendas = this.bdVendas.filter(venda =>
+          venda.customer.name.toLowerCase().includes(search.toLowerCase()) || venda.products.find(produto => produto.product.name.toLowerCase().includes(search.toLowerCase() ))
+        );
         break;
       default:
         console.log('Entre com uma opção válida!\nP para Produtos - C para Clientes - V para Vendas');
