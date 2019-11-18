@@ -15,6 +15,7 @@ import { ModalPessoaComponent } from '../modal-pessoa/modal-pessoa.component';
 import { ModalExcluirComponent } from '../modal-excluir/modal-excluir.component';
 import { Vendas } from '../models/Vendas';
 import { VendasServiceService } from '../services/VendasService/vendas-service.service';
+import { ToastService } from '../services/ToastController/toast.service';
 //import { login } from '../login/login.component';
 
 @Component({
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
   busca: string;
 
   constructor(
-    private servicos: ServicosService,
+    private toastService: ToastService,
     private produtosService: ProdutosServiceService,
     private clientesService: ClientesServiceService,
     private vendasService: VendasServiceService,
@@ -142,6 +143,17 @@ export class HomeComponent implements OnInit {
       this.vendas = this.bdVendas;
     })
     .catch(error => {
+      console.log(error);
+    });
+  }
+
+  limparVendas() {
+    this.vendasService.clearSales()
+    .then(() => {
+      this.toastService.show('Histórico de vendas excluído', true);
+    })
+    .catch(error => {
+      this.toastService.show('Erro ao limpar histórico de vendas', false);
       console.log(error);
     });
   }

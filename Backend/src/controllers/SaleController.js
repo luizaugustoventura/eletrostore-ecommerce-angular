@@ -110,6 +110,21 @@ module.exports = {
     clear(req, res) {
         Sale.deleteMany({})
         .then(() => {
+            //Deletando produtos desabilitados
+            Product.deleteMany({
+                disabled: true
+            })
+            .then(() => { console.log('Disabled products successfully deleted!') })
+            .catch(error => { console.log(error) });
+
+            //Deletando usuários desabilitados
+            Person.deleteMany({
+                disabled: true
+            })
+            .then(() => { console.log('Disabled people successfully deleted!') })
+            .catch(error => { console.log(error) });
+
+
             return res.status(200).json({
                 success: true,
                 message: 'Sales history successfully cleared'
