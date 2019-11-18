@@ -94,6 +94,17 @@
               </div>
             </div>
 
+            <!--NÚMERO-->
+            <div class="form-group row"  style="margin-top: -5px;">
+                <div class="col-2 col-md-2 col-form-label">
+                  <label for="inputNumero" class="">Número</label>
+                </div>
+                <div class="col-10 col-md-4">
+                  <input type="number" formControlName="number" id="inputNumero" class="form-control"
+                    required autofocus name="numero" >
+                </div>
+            </div>
+
             <br>
             <button type="submit" [disabled]="!formRegister.valid" class="btn btn-info">Cadastrar</button>
             <br><br>

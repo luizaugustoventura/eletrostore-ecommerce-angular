@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../services/LoginService/login.service';
 import { LoggedPerson } from '../models/LoggedPerson';
 import { Router } from '@angular/router';
+import { ToastService } from '../services/ToastController/toast.service';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
       private loginService: LoginService,
+      private toastService: ToastService,
       private formBuilder: FormBuilder,
       private httpClient: HttpClient,
       private router: Router
@@ -27,6 +30,7 @@ export class RegisterComponent implements OnInit {
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
+      number: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       state: new FormControl('', Validators.required),
@@ -41,6 +45,7 @@ export class RegisterComponent implements OnInit {
       email: formValues.email,
       password: formValues.password,
       address: formValues.address,
+      number: formValues.number,
       city: formValues.city,
       neighborhood: formValues.neighborhood,
       state: formValues.state,
@@ -59,15 +64,18 @@ export class RegisterComponent implements OnInit {
 
         this.loginService.logIn(login)
         .then(loginInfo => {
+            this.toastService.show('Usuário registrado com sucesso', true);
             this.loggedPerson = loginInfo.person;
             this.loginService.setLoggedPerson(this.loggedPerson);
             this.router.navigate(['/home']);
         })
         .catch(error => {
+          this.toastService.show('Erro ao registrar usuário', false);
           console.log(error.message);
         });
     })
     .catch(error => {
+      this.toastService.show('Erro ao registrar usuário', false);
       console.log(error.message);
     });
   }

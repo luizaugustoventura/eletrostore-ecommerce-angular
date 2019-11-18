@@ -6,7 +6,8 @@ module.exports = {
             const person = await Person.findOne({
                 $and: [
                     { email: req.body.email }, 
-                    { password: req.body.password }
+                    { password: req.body.password },
+                    { disabled: false }
                 ]
             })
             .then(prsn => {
@@ -44,11 +45,12 @@ module.exports = {
         });
 
         if(inUse == '') {
-            const pers = await Person.create(person)
-            .then(() => {
+            await Person.create(person)
+            .then((prs) => {
+                console.log(prs);
                 return res.json({ 
                     success: true,
-                    personId: pers._id 
+                    person: prs 
                 });
             })
             .catch((error) => {
