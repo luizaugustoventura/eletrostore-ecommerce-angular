@@ -30,7 +30,7 @@ export class ClientesServiceService {
     return this.httpClient.put(`${this.apiUrl}/people`, pessoa).toPromise();
   }
 
-  deleteCliente(cli: any): Promise<any> {
-    return this.httpClient.delete(`${this.apiUrl}/people`, cli).toPromise();
+  deleteCliente(_id: any): Promise<any> {
+    return this.httpClient.delete(`${this.apiUrl}/people/?_id=${_id}`).toPromise();
   }
 }

@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProdutosServiceService } from '../services/ProdutosService/produtos-service.service';
 import { ClientesServiceService } from '../services/ClientesService/clientes-service.service';
 import { ToastService } from '../services/ToastController/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-excluir',
@@ -18,7 +19,8 @@ export class ModalExcluirComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private produtosService: ProdutosServiceService,
     private clientesService: ClientesServiceService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -46,7 +48,8 @@ export class ModalExcluirComponent implements OnInit {
       default:
         console.log("Insira uma opção válida! 'P' para Produto ou 'C' para Cliente!");
     }
-    this.activeModal.dismiss('Cross click');
+    this.activeModal.close('Close click');
+    this.router.navigate(['/home']);
   }
 
 }

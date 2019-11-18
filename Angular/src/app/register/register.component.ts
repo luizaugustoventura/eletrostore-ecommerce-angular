@@ -45,7 +45,8 @@ export class RegisterComponent implements OnInit {
       neighborhood: formValues.neighborhood,
       state: formValues.state,
       zipCode: formValues.zipCode,
-      admin: false
+      admin: false,
+      disabled: false
     };
 
     this.loginService.signIn(user)

@@ -118,8 +118,9 @@ export class HomeComponent implements OnInit {
         const state = cli.state;
         const zipCode = cli.zipCode;
         const neighborhood = cli.neighborhood;
+        const disabled = cli.disabled;
 
-        return { _id, name, email, password, admin, address, number, city, state, zipCode, neighborhood };
+        return { _id, name, email, password, admin, address, number, city, state, zipCode, neighborhood, disabled };
       });
 
       this.clientes = this.bdClientes;
@@ -162,7 +163,10 @@ export class HomeComponent implements OnInit {
   }
 
 
-  recarregar() {
+  async recarregar() {
+    await this.getProdutos(this.login.admin);
+    await this.getClientes();
+    await this.getVendas();
     this.produtos = this.bdProdutos;
     this.clientes = this.bdClientes;
     this.vendas = this.bdVendas;

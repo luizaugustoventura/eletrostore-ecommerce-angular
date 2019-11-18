@@ -93,13 +93,13 @@ module.exports = {
     },
 
     async delete(req, res) {
-        if (req.body._id) {
+        if (req.query._id) {
             const activeUser = await Sale.findOne({
-                customerId: req.body._id
+                customerId: req.query._id
             }); 
 
             if(!activeUser) { //Remove de fato o usuário
-                Person.deleteOne({ _id: req.body.id })
+                Person.deleteOne({ _id: req.query._id })
                 .then(person => {
                     return res.status(200).json({
                         success: true,
@@ -118,7 +118,7 @@ module.exports = {
                 //targetUser = await Person.findById(req.body._id);
 
                 Person.updateOne(
-                    { _id: req.body._id },
+                    { _id: req.query._id },
                     { $set: {
                             disabled: true,
                         } 
@@ -128,7 +128,7 @@ module.exports = {
                         if(!error) {
                             return res.status(200).json({
                                 success: true,
-                                personId: req.body._id
+                                personId: req.query._id
                             });
                         }
                         else {
