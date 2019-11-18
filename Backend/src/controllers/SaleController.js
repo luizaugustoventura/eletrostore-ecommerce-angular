@@ -105,5 +105,21 @@ module.exports = {
                 });
             });
         }
+    },
+
+    clear(req, res) {
+        Sale.deleteMany({})
+        .then(() => {
+            return res.status(200).json({
+                success: true,
+                message: 'Sales history successfully cleared'
+            });
+        })
+        .catch(() => {
+            return res.status(500).json({
+                success: false,
+                message: 'Error at cleaning sales history'
+            }); 
+        });
     }
 }

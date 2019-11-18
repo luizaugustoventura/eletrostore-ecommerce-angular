@@ -58,14 +58,12 @@
     <div>
       <div class="row">
         <span *ngFor="let produto of produtos" class="col text-center">
-          <span *ngIf="!produto.disabled">
             <a routerLink="/detail/{{produto._id}}" class="text-secondary negrito">
               <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
                 <span>{{produto.name}}</span><br>
                 <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>
             </a>
             <br><br>
-          </span>
         </span>
       </div>
     </div>
@@ -102,7 +100,7 @@
             <div class="row">
               <span *ngFor="let produto of produtos" class="col text-center">
                 <a routerLink="/detail/{{produto._id}}" class="text-secondary"
-                [class.negrito]="!produto.disabled" [class.negritored]="produto.disabled">
+                [class.negritored]="produto.disabled" [class.negrito]="!produto.disabled">
                   <img src="{{produto.imageUrl}}" width="300" height="200" class="rounded"><br>
                     <span>{{produto.name}}</span><br>
                     <span class="text-info"><b>R${{produto.price | number:".2"}}</b></span>

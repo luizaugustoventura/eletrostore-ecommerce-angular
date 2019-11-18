@@ -14,8 +14,13 @@ export class ProdutosServiceService {
     private httpClient: HttpClient
   ) { }
 
-  getProdutos(): Promise<any> {
-    return this.httpClient.get(this.apiUrl).toPromise();
+  getProdutos(admin: boolean): Promise<any> {
+    if(admin) {
+      return this.httpClient.get(this.apiUrl + '/?admin=1').toPromise();
+    }
+    else {
+      return this.httpClient.get(this.apiUrl).toPromise();
+    }
   }
 
   getProduto(id: string): Promise<any> {
@@ -30,7 +35,7 @@ export class ProdutosServiceService {
     return this.httpClient.put(this.apiUrl, produto).toPromise();
   }
 
-  deleteProduto(produto: any): Promise<any> {
-    return this.httpClient.delete(this.apiUrl, produto).toPromise();
+  deleteProduto(_id: string): Promise<any> {
+    return this.httpClient.delete(this.apiUrl + '/?_id=' + _id).toPromise();
   }
 }

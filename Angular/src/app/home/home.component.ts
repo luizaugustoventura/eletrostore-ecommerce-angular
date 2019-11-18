@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     else
     {
       this.login = this.loginService.getLoggedPerson();
-      this.getProdutos();
+      this.getProdutos(this.login.admin);
       this.getClientes();
       this.getVendas();
     }
@@ -79,8 +79,8 @@ export class HomeComponent implements OnInit {
     });
   } */
 
-  getProdutos() {
-    this.produtosService.getProdutos()
+  getProdutos(admin: boolean) {
+    this.produtosService.getProdutos(admin)
     .then(prods => {
        this.bdProdutos = prods.map(prod => {
            const _id = prod._id;
@@ -90,11 +90,13 @@ export class HomeComponent implements OnInit {
            const price = prod.price;
            const stock = prod.stock;
            const sales = prod.sales;
+           const disabled = prod.disabled;
 
-           return { _id, name, imageUrl, description, price, stock, sales};
+           return { _id, name, imageUrl, description, price, stock, sales, disabled };
        });
 
        this.produtos = this.bdProdutos;
+       console.log(this.produtos);
     })
     .catch(error => {
       console.log(error);

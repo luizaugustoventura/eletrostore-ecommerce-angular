@@ -3,17 +3,32 @@ const Product = require('../models/Product');
 
 module.exports = {
     index(req, res) {
-        Product.find({})
-        .then((products) => {
-            return res.status(200).json(products);
-        })
-        .catch(error => {
-            console.log(error);
-            return res.status(500).json({
-                success: false,
-                message: 'Could not list products'
+        if(req.query.admin) {
+            Product.find({})
+            .then((products) => {
+                return res.status(200).json(products);
+            })
+            .catch(error => {
+                console.log(error);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Could not list products'
+                });
             });
-        });
+        }
+        else {
+            Product.find({ disabled: false })
+            .then((products) => {
+                return res.status(200).json(products);
+            })
+            .catch(error => {
+                console.log(error);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Could not list products'
+                });
+            });
+        }
         
     },
 
@@ -102,15 +117,20 @@ module.exports = {
     },
 
     async delete(req, res) {
-        if(req.body._id) {
-            const activeProduct = await Sale.findOne({
-                productId: req.body._id
+        if(req.query._id) {
+            let activeProduct = false;
+            const sales = await Sale.find({}).then(s => {return s});
+            await sales.forEach(s => {
+                s.products.forEach(p => {
+                    if(p.productId == req.query._id) 
+                        activeProduct = true;
+                });
             });
 
             if(activeProduct)
             {
                 Product.updateOne(
-                    { _id: product._id },
+                    { _id: req.query._id },
                     { $set: {
                             disabled: true,
                         } 
@@ -120,7 +140,7 @@ module.exports = {
                         if(!err) {
                             return res.status(200).json({
                                 success: true,
-                                productId: targetProduct._id
+                                productId: req.query._id
                             });   
                         }
                         else {
@@ -134,11 +154,11 @@ module.exports = {
                 );
             }
             else {
-                Product.deleteOne({ _id: req.body.id })
-                .then(product => {
+                Product.deleteOne({ _id: req.query._id })
+                .then(() => {
                     return res.status(200).json({
                         success: true,
-                        productId: product._id
+                        productId: req.query._id
                     });
                 })
                 .catch((error) => {
