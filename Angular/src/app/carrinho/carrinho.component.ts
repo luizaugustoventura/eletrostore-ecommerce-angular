@@ -43,7 +43,10 @@ export class CarrinhoComponent implements OnInit {
     //Cria o objeto para finalizar a venda a partir do ID do cliente mais a lista anterior
     const cart = {
       customerId: this.loginService.getLoggedPerson()._id,
-      products: products
+      products: products,
+      totalPrice: this.meuCarrinho.reduce((a,b) => {
+        return a + (b.product.price * b.quantity)
+      }, 0)
     };
 
     console.log(cart);

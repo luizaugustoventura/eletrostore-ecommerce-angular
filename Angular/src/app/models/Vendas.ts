@@ -7,4 +7,6 @@ export class Vendas {
     product: Produto,
     quantity: number
   }];
+  totalPrice: number;
+  date: string;
 }

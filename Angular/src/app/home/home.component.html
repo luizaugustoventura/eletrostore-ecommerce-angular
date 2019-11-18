@@ -205,10 +205,12 @@
                       <p><b>Quantidade: </b>{{produto.quantity}}</p>
                       <br>
                     </span>
+                    <p><b>Preço total: </b>R${{venda.totalPrice | number: ".2" }}</p>
+                    <p><b>Data: </b>{{venda.date | date: 'dd/MM/yyyy'}}</p>
                   </ng-template>
                 </ngb-panel>
 
-                <ngb-panel [title]="2+2" [disabled]="true">
+                <ngb-panel title="" [disabled]="true">
                   <ng-template ngbPanelContent>
 
                   </ng-template>

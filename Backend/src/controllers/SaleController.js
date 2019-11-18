@@ -71,7 +71,9 @@ module.exports = {
                         product: products.find(p => {return p.id == prod.productId}),
                         quantity: prod.quantity
                     }
-                })
+                }),
+                totalPrice: s.totalPrice,
+                date: s.createdAt
             }
         });
 

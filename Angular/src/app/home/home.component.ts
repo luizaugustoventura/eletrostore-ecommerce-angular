@@ -137,7 +137,9 @@ export class HomeComponent implements OnInit {
       this.bdVendas = sales.map(sls => {
         const customer = sls.customer;
         const products = sls.products;
-        return { customer, products };
+        const totalPrice = sls.totalPrice;
+        const date = sls.date;
+        return { customer, products, totalPrice, date };
       });
 
       this.vendas = this.bdVendas;
