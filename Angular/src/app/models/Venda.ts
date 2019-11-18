@@ -1,6 +1,6 @@
 export class Venda {
   customerId: string;
-  produtos: [{
+  products: [{
     productId: string;
     quantity: number;
   }];

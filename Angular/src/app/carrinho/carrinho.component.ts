@@ -4,6 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { VendasServiceService } from '../services/VendasService/vendas-service.service';
 import { ProdutoCarrinho } from '../models/ProdutoCarrinho';
 import { LoginService } from '../services/LoginService/login.service';
+import { Venda } from '../models/Venda';
+import { ProdutosServiceService } from '../services/ProdutosService/produtos-service.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -17,6 +19,7 @@ export class CarrinhoComponent implements OnInit {
   constructor(
     private vendasService: VendasServiceService,
     private loginService: LoginService,
+    private produtosService: ProdutosServiceService,
     private servicos: ServicosService,
     public activeModal: NgbActiveModal
     ) {
@@ -47,6 +50,14 @@ export class CarrinhoComponent implements OnInit {
     .then(sale => {
       console.log('Venda realizada');
       console.log(sale);
+
+      cart.products.forEach(async p => {
+        let prod = await this.produtosService.getProduto(p.productId).then(produtct => { return produtct.product });
+        prod.sales += p.quantity;
+        prod.stock -= p.quantity;
+        //console.log(prod);
+        this.produtosService.updateProduto(prod);
+      });
     })
     .catch((error) => {
       console.log('Erro ao finalizar venda');
