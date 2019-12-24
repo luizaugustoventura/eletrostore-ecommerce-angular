@@ -2,13 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const connection = require('../connection');
 
 const server = express();
 
-mongoose.connect('sua_string_de_conexao', {
+mongoose.connect(connection.url, {
     useNewUrlParser: true
 });
-
 
 server.use(cors());
 server.use(express.json());
