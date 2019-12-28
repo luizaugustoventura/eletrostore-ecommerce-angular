@@ -11,12 +11,12 @@ mapeamento Objeto-Documento.
 ##### Servidor Node
 
 Opção 1: Você pode iniciar o servidor por meio do Nodemon, que é uma dependência de desenvolvimento que reinicia o servidor automaticamente
-após qualquer alteração no código-fonte. Para tal, execute o seguinte comando no terminal: **yarn dev** ou **nodemon src/index.js**
+após qualquer alteração no código-fonte. Para tal, execute o seguinte comando no terminal: **`yarn dev`** ou **`nodemon src/index.js`**
 
-Opção 2: Você também pode iniciar o servidor da maneira tradicional, executando o comando: **noode src/index.js**
+Opção 2: Você também pode iniciar o servidor da maneira tradicional, executando o comando: **`noode src/index.js`**
 
 ##### Aplicação Angular
 
-Para executar a aplicação Anuglar, execute o seguinte comando no terminal: **ng serve --open**
+Para executar a aplicação Anuglar, execute o seguinte comando no terminal: **`ng serve --open`**
 
 
