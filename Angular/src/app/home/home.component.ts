@@ -192,7 +192,7 @@ export class HomeComponent implements OnInit {
   }
 
   modalCarrinho() {
-    const modal = this.modalService.open(CarrinhoComponent);
+    const modal = this.modalService.open(CarrinhoComponent, { size: 'lg', scrollable: true });
     modal.componentInstance.name = "Carrinho";
   }
 
