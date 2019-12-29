@@ -1,27 +1,44 @@
 # ProjetoAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+#### Especificações: 
 
-## Development server
+Angular CLI: 8.3.12
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Node: 10.15.1
 
-## Code scaffolding
+OS: win32 x64
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular: 8.2.11
 
-## Build
+... animations, common, compiler, compiler-cli, core, forms
+... language-service, platform-browser, platform-browser-dynamic
+... router
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+-----------------------------------------------------------
+Package -> Version
+-----------------------------------------------------------
+@angular-devkit/architect -> 0.803.12
 
-## Running unit tests
+@angular-devkit/build-angular -> 0.803.12
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@angular-devkit/build-optimizer -> 0.803.12
 
-## Running end-to-end tests
+@angular-devkit/build-webpack -> 0.803.12
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@angular-devkit/core -> 8.3.12
 
-## Further help
+@angular-devkit/schematics -> 8.3.12
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@angular/cli -> 8.3.12
+
+@ngtools/webpack -> 8.3.12
+
+@schematics/angular -> 8.3.12
+
+@schematics/update -> 0.803.12
+
+rxjs -> 6.5.3
+
+typescript -> 3.5.3
+
+webpack -> 4.39.2
